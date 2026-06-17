@@ -741,16 +741,32 @@ export default function AnimeZone() {
             </div>
           </div>
 
-          {/* VIDEO PLAYER — real embed URL from backend */}
-          <div className="player-wrap">
+          {/* VIDEO PLAYER */}
+          <div className="player-wrap" style={{
+            display:"flex", flexDirection:"column",
+            alignItems:"center", justifyContent:"center",
+            background:"#0D1B3E", borderRadius:16, minHeight:280, gap:24
+          }}>
             {embedUrl ? (
-              <iframe
-                src={embedUrl}
-                allowFullScreen
-                allow="autoplay; encrypted-media"
-                referrerPolicy="no-referrer"
-                title={selectedEp.title}
-              />
+              <>
+                <div style={{fontSize:"4rem"}}>▶️</div>
+                <div style={{color:"#fff", fontSize:"1.1rem", fontWeight:600, textAlign:"center", padding:"0 20px"}}>
+                  {selectedEp.series?.title} — S{selectedEp.season}E{selectedEp.ep}
+                </div>
+                <button
+                  onClick={() => window.open(embedUrl, "_blank")}
+                  style={{
+                    background:"linear-gradient(135deg,#7C3AFF,#00F5FF)",
+                    border:"none", borderRadius:12, padding:"14px 36px",
+                    color:"#fff", fontSize:"1.1rem", fontWeight:700,
+                    cursor:"pointer", letterSpacing:1
+                  }}>
+                  ▶ Watch Now
+                </button>
+                <p style={{color:"rgba(255,255,255,0.4)", fontSize:"0.78rem", textAlign:"center", margin:0}}>
+                  Video player new tab mein khulega
+                </p>
+              </>
             ) : (
               <div className="loader" style={{height:"100%"}}>
                 <div className="spinner" /> Loading player...
