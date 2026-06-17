@@ -742,33 +742,19 @@ export default function AnimeZone() {
           </div>
 
           {/* VIDEO PLAYER */}
-          <div className="player-wrap" style={{
-            display:"flex", flexDirection:"column",
-            alignItems:"center", justifyContent:"center",
-            background:"#0D1B3E", borderRadius:16, minHeight:280, gap:24
-          }}>
+          <div className="player-wrap" style={{position:"relative", background:"#000", borderRadius:16, overflow:"hidden", minHeight:280}}>
             {embedUrl ? (
-              <>
-                <div style={{fontSize:"4rem"}}>▶️</div>
-                <div style={{color:"#fff", fontSize:"1.1rem", fontWeight:600, textAlign:"center", padding:"0 20px"}}>
-                  {selectedEp.series?.title} — S{selectedEp.season}E{selectedEp.ep}
-                </div>
-                <button
-                  onClick={() => window.open(embedUrl, "_blank")}
-                  style={{
-                    background:"linear-gradient(135deg,#7C3AFF,#00F5FF)",
-                    border:"none", borderRadius:12, padding:"14px 36px",
-                    color:"#fff", fontSize:"1.1rem", fontWeight:700,
-                    cursor:"pointer", letterSpacing:1
-                  }}>
-                  ▶ Watch Now
-                </button>
-                <p style={{color:"rgba(255,255,255,0.4)", fontSize:"0.78rem", textAlign:"center", margin:0}}>
-                  Video player new tab mein khulega
-                </p>
-              </>
+              <iframe
+                src={embedUrl}
+                allowFullScreen
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture; web-share; camera; microphone"
+                referrerPolicy="unsafe-url"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-top-navigation"
+                style={{width:"100%", height:"100%", minHeight:280, border:"none", display:"block"}}
+                title={selectedEp.title}
+              />
             ) : (
-              <div className="loader" style={{height:"100%"}}>
+              <div className="loader" style={{height:280, display:"flex", alignItems:"center", justifyContent:"center"}}>
                 <div className="spinner" /> Loading player...
               </div>
             )}
