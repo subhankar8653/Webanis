@@ -486,9 +486,8 @@ export default function AnimeZone() {
     setEmbedUrl("");
     apiFetch(`/api/episode/${selectedEp.slug}`)
       .then(data => {
-        // Proxy URL use karo — X-Frame-Options bypass hoga
-        const proxyUrl = `${API_BASE}/api/proxy/embed?trid=${data.trid}&trtype=${data.trtype || 2}`;
-        setEmbedUrl(proxyUrl);
+        // Direct toono embed URL — seedha iframe mein
+        setEmbedUrl(data.embed_url);
       })
       .catch(err => setApiError(err.message));
   }, [page, selectedEp?.slug]);
